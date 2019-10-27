@@ -1,8 +1,9 @@
 #ifndef PID_H
 #define PID_H
 
-class PID {
- public:
+class PID
+{
+public:
   /**
    * Constructor
    */
@@ -17,8 +18,12 @@ class PID {
    * Initialize PID.
    * @param (Kp_, Ki_, Kd_) The initial PID coefficients
    */
-  void Init(double Kp_, double Ki_, double Kd_);
+  void Init(double k_p, double k_i, double k_d);
 
+  /**
+   * compute steering control
+   */
+  double Control(double cte);
   /**
    * Update the PID error variables given cross track error.
    * @param cte The current cross track error
@@ -31,20 +36,25 @@ class PID {
    */
   double TotalError();
 
- private:
+private:
   /**
    * PID Errors
    */
-  double p_error;
-  double i_error;
-  double d_error;
+  double p_error_;
+  double i_error_;
+  double d_error_;
 
+  double cte_std_dev_;
   /**
    * PID Coefficients
-   */ 
-  double Kp;
-  double Ki;
-  double Kd;
+   */
+  double k_p_;
+  double k_i_;
+  double k_d_;
+
+  double pre_cte_;
+  double int_cte_;
+  bool first_update_;
 };
 
-#endif  // PID_H
+#endif // PID_H
