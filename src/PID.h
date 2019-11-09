@@ -44,7 +44,10 @@ private:
   double i_error_;
   double d_error_;
 
-  double cte_std_dev_;
+  double cte_total_error_;
+  double best_error_;
+  bool best_error_initialized_;
+  int opt_count_;
   /**
    * PID Coefficients
    */
@@ -54,6 +57,7 @@ private:
 
   double pre_cte_;
   double int_cte_;
+  int count_;
   bool first_update_;
 };
 
